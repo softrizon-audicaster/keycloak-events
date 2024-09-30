@@ -33,6 +33,7 @@
     <keycloak.version>25.0.0</keycloak.version>
     <lombok.version>1.18.32</lombok.version>
     <auto-service.version>1.1.1</auto-service.version>
+    <google-cloud-pubsub.version>1.132.3</google-cloud-pubsub.version>
     <ossrh.url>https://s01.oss.sonatype.org</ossrh.url>
   </properties>
 
@@ -213,6 +214,13 @@
       <artifactId>nashorn-core</artifactId>
       <version>15.4</version>
       <scope>provided</scope>
+    </dependency>
+
+    <!-- Google Cloud Pub/Sub -->
+    <dependency>
+      <groupId>com.google.cloud</groupId>
+      <artifactId>google-cloud-pubsub</artifactId>
+      <version>${google-cloud-pubsub.version}</version>
     </dependency>
 
     <!-- testing -->
