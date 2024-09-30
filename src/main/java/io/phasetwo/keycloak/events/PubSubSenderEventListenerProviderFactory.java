@@ -82,17 +82,6 @@ public class PubSubSenderEventListenerProviderFactory extends MultiEventListener
 
     @Override
     public void close() {
-//        try {
-//            if (publisher != null) {
-//                log.info("Shutting down Pub/Sub publisher");
-//                publisher.shutdown();
-//                publisher.awaitTermination(1, TimeUnit.MINUTES);
-//            }
-//        } catch (InterruptedException exception) {
-//            log.debug("Failed to shutdown Pub/Sub publisher.", exception);
-//            Thread.currentThread().interrupt();
-//        }
-
         try {
             log.info("Shutting down scheduler");
             exec.shutdown();

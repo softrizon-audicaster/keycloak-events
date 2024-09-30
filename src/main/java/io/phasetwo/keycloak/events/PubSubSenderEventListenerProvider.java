@@ -110,23 +110,9 @@ public class PubSubSenderEventListenerProvider extends SenderEventListenerProvid
             return;
         }
 
-//        schedule(new SenderTask(ModelToRepresentation.toRepresentation(event), getBackOff()),
-//                0L, TimeUnit.MILLISECONDS);
-//
-//        if (ResourceType.USER.equals(event.getResourceType())
-//                && OperationType.CREATE.equals(event.getOperationType())) {
-//
-//            String resourcePath = event.getResourcePath();
-//            if (resourcePath.startsWith("users/")) {
-////                RealmModel realm = session.realms().getRealm(event.getRealmId());
-////                UserModel user = session.users().getUserById(realm, resourcePath.substring("users/".length()));
-////
-////                schedule(new SenderTask(ModelToRepresentation.toRepresentation(event), getBackOff()),
-////                        0L, TimeUnit.MILLISECONDS);
-//            } else {
-//                log.warnf("AdminEvent was CREATE:USER without appropriate resourcePath=%s", resourcePath);
-//            }
-//        }
+        // Process admin event
+        schedule(new SenderTask(ModelToRepresentation.toRepresentation(event), getBackOff()),
+                0L, TimeUnit.MILLISECONDS);
     }
 
     @Override
@@ -163,7 +149,7 @@ public class PubSubSenderEventListenerProvider extends SenderEventListenerProvid
         }
     }
 
-    class AdminEventType {
+    static class AdminEventType {
         public final OperationType operationType;
         public final ResourceType resourceType;
 
