@@ -118,13 +118,15 @@ public class PubSubSenderEventListenerProvider extends SenderEventListenerProvid
     @Override
     void send(SenderTask task) throws SenderException, IOException {
         final String topic = publisher.getTopicName().getTopic();
+        final Set<EventType> eventTypes = getUserEventTypes();
+        final Set<AdminEventType> adminEventTypes = getAdminEventTypes();
+
         log.infof("Attempting to send %s message to Pub/Sub: Topic: %s, Attributes: %s",
-                getUserEventTypes().toString(), topic, getMessageAttributes().toString());
+                !eventTypes.isEmpty() ? eventTypes.toString() : adminEventTypes.toString(), topic,
+                getMessageAttributes().toString());
 
         try {
             String jsonStr = JsonSerialization.writeValueAsString(task.getEvent());
-            log.infof("Pub/Sub: Message: %s", jsonStr);
-
             ByteString data = ByteString.copyFromUtf8(jsonStr);
             PubsubMessage pubsubMessage = PubsubMessage.newBuilder()
                     .putAllAttributes(getMessageAttributes())
